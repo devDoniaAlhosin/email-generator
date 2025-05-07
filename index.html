@@ -535,11 +535,7 @@
         .loader-icon {
             width: 90px;
             height: 90px;
-            animation: loader-spin 1.5s linear infinite, loader-pulse 1.5s ease-in-out infinite alternate;
-        }
-        @keyframes loader-spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            animation: loader-pulse 1.5s ease-in-out infinite alternate;
         }
         @keyframes loader-pulse {
             0% { filter: drop-shadow(0 4px 24px #2f126b88) brightness(1); }
