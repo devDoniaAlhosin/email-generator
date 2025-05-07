@@ -185,15 +185,16 @@
         }
 
         .content {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             align-items: start;
             background: var(--bg-color);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             padding: 40px;
             border: 1px solid var(--border-color);
-            max-width: 600px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -458,6 +459,15 @@
             .hero-image {
                 width: 250px;
             }
+
+            .content {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .video-guide {
+                order: -1;
+            }
         }
 
         /* Add after .hero-image styles */
@@ -644,6 +654,66 @@
             color: var(--text-color);
             font-size: 14px;
         }
+
+        /* Add after form styles */
+        .video-guide {
+            background: var(--bg-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-guide h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+
+        .video-steps {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-steps h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .video-steps ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .video-steps li {
+            margin-bottom: 10px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -712,6 +782,32 @@
                     </div>
                     <button type="submit" class="generate-btn">Generate Signature</button>
                 </form>
+            </div>
+
+            <div class="video-guide">
+                <h3>How to Use</h3>
+                <div class="video-container">
+                    <video 
+                        src="./signatuture-vid-2.mp4" 
+                        controls
+                        muted
+                        autoplay
+                        loop
+                        playsinline
+                        class="video-player"
+                        title="How to Create Your Email Signature">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-steps">
+                    <h4>Quick Steps:</h4>
+                    <ol>
+                        <li>Fill in your details in the form</li>
+                        <li>Click "Generate Signature"</li>
+                        <li>Your signature will appear in the preview</li>
+                        <li>Copy the signature and paste it in your email settings</li>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
