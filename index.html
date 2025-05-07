@@ -495,9 +495,61 @@
                 height: 24px;
             }
         }
+
+        /* Add after .hero styles */
+        .wave-divider {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            margin-top: -41px;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 2;
+        }
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Loader Styles */
+        #page-loader {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(120deg, #EB1C5F 0%, #a0103a 40%, #000 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.7s cubic-bezier(.77,0,.18,1);
+            opacity: 1;
+        }
+        #page-loader.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loader-icon {
+            width: 90px;
+            height: 90px;
+            animation: loader-spin 1.5s linear infinite, loader-pulse 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes loader-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes loader-pulse {
+            0% { filter: drop-shadow(0 4px 24px #2f126b88) brightness(1); }
+            100% { filter: drop-shadow(0 8px 32px #2b2bff88) brightness(1.2); }
+        }
     </style>
 </head>
 <body>
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <img src="https://bohemiangeeks.com/wp-content/uploads/2024/08/icon.svg" alt="Loading..." class="loader-icon">
+    </div>
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -513,6 +565,18 @@
             </div>
         </div>
     </section>
+    <!-- SVG Wave at the end of the hero/banner -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGradient" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#EB1C5F"/>
+                    <stop offset="100%" stop-color="#000"/>
+                </linearGradient>
+            </defs>
+            <path d="M0,40 C360,120 1080,0 1440,80 L1440,120 L0,120 Z" fill="url(#waveGradient)"/>
+        </svg>
+    </div>
 
     <!-- Main Content -->
     <div class="container" id="generator">
@@ -612,6 +676,13 @@
             `;
             
             document.getElementById('signaturePreview').innerHTML = signatureHTML;
+        });
+
+        // Loader fade-out on page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('page-loader').classList.add('hide');
+            }, 400); // slight delay for smoothness
         });
     </script>
 </body>
