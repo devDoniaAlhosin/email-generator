@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bohemian Geeks - Email Signature Generator</title>
+    <style>
+        :root {
+            --text-color: #888;
+            --primary-color: #EB1C5F;
+            --bg-color: #ffffff;
+            --hero-bg: url('https://bohemiangeeks.com/wp-content/uploads/2024/08/2306253931.jpg');
+            --border-color: #e1e4e8;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            background: var(--hero-bg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 100px 100px;
+            text-align: start;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+            width: 400px;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .hero-logo {
+            width: 180px;
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            text-align: start;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.18);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            line-height: 1.1;
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            animation: fadeInSlide 1.2s cubic-bezier(.77,0,.18,1) both;
+        }
+        .hero h1 .hello {
+            font-weight: 400;
+            opacity: 0.85;
+            font-size: 2.2rem;
+            letter-spacing: 0.5px;
+            margin-right: 6px;
+            animation: fadeInLeft 1.2s 0.1s both;
+        }
+        .hero h1 .bgk {
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 2.7rem;
+            position: relative;
+            padding-bottom: 4px;
+            background: linear-gradient(90deg, var(--primary-color) 60%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: fadeInRight 1.2s 0.3s both;
+        }
+        .hero h1 .bgk::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            opacity: 0.7;
+        }
+        @keyframes fadeInSlide {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            0% { opacity: 0; transform: translateX(-40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            0% { opacity: 0; transform: translateX(40px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        .hero p {
+            font-size: 1rem;
+            color: #ffffff;
+            text-align: start;
+            width: 70%;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            text-align: left;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 4px 15px rgba(235, 28, 95, 0.3);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(235, 28, 95, 0.4);
+        }
+
+        /* Main Content Styles */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            background: var(--bg-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: var(--bg-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(235, 28, 95, 0.1);
+        }
+
+        .generate-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .generate-btn:hover {
+            background: #d41854;
+            transform: translateY(-2px);
+        }
+
+        /* Preview Styles */
+        .preview-container {
+            background: var(--bg-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .preview-container h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Signature Styles */
+        .signature-container {
+            max-width: 420px;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            padding-right: 20px;
+        }
+
+        .logo-img {
+            width: 100%;
+            max-width: 150px;
+        }
+
+        .data {
+            padding-left: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .name {
+            color: var(--primary-color);
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+
+        .role {
+            font-size: 14px;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+
+        .address {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1;
+            color: #b2b2b2;
+        }
+
+        .socials {
+            padding: 20px 0 14px 0;
+            height: 30px;
+        }
+
+        .social-icons {
+            margin-left: 20px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .social-icons img {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            filter: grayscale(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons img:hover {
+            filter: grayscale(0);
+        }
+
+        .Connect-heading {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .footer {
+            margin-top: 18px;
+            font-size: 12px;
+            color: var(--text-color);
+        }
+
+        .disclaimer {
+            width: 85%;
+            padding: 13px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 5px;
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --hero-bg: linear-gradient(135deg, #23272a 0%, #1a1a1a 100%);
+                --border-color: #2c2f33;
+            }
+
+            .form-container,
+            .preview-container {
+                background: #23272a;
+            }
+
+            .form-group input {
+                background: #2c2f33;
+                border-color: #444;
+                color: #f1f1f1;
+            }
+
+            .signature-container {
+                background: #23272a;
+                color: #f1f1f1;
+            }
+
+            .footer {
+                color: #aaa;
+            }
+
+            .disclaimer {
+                border-color: #444;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero {
+                padding: 80px 50px;
+            }
+
+            .hero-image {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 20px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 40px;
+            }
+
+            .hero h1 {
+                flex-direction: column;
+                align-items: flex-start;
+                font-size: 2rem;
+                gap: 0;
+            }
+            .hero h1 .hello, .hero h1 .bgk {
+                font-size: 2rem;
+            }
+
+            .hero-cta {
+                text-align: center;
+            }
+
+            .hero-image {
+                width: 250px;
+            }
+        }
+
+        /* Add after .hero-image styles */
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-overlay {
+            order: 1;
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 100%;
+            height: 400px;
+            background: #fff;
+            border-radius:50px 50px 50px 50px;
+            display: flex ;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(86, 86, 86, 0.12);
+            z-index: 1;
+        }
+
+        .arrow-img {
+            width: 36px;
+            height: 36px;
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            
+            .hero-image-wrapper {
+                width: 250px;
+            }
+            .arrow-overlay {
+                width: 44px;
+                height: 44px;
+                top: 8px;
+                left: 8px;
+            }
+            .content {
+                display: flex;
+                flex-direction: column;
+                .preview-container{
+                    width: 100%;
+                } 
+                .form-container{
+                    width: 100%;
+                }
+            }
+            .arrow-img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/bohemiangeeks-logo.webp" alt="Bohemian Geeks Logo" class="hero-logo">
+            <h1><span class="hello">Hello,</span> <span class="bgk">BGKian's</span></h1>
+            <p>Create your professional email signature in seconds with our easy-to-use generator. Stand out with a signature that reflects your brand and personality.</p>
+            <a href="#generator" class="hero-cta">Create Your Signature</a>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="https://bohemiangeeks.com/wp-content/uploads/2024/09/boma@4x-1473x1536.png" alt="Poma" class="hero-image">
+            <div class="arrow-overlay">
+                <img src="https://bohemiangeeks.com/wp-content/uploads/2025/01/arrow_up.png" alt="Arrow Up" class="arrow-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container" id="generator">
+        <div class="content">
+            <div class="form-container">
+                <form id="signatureForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" id="jobTitle" name="jobTitle" required placeholder="Enter your job title">
+                    </div>
+                    <button type="submit" class="generate-btn">Generate Signature</button>
+                </form>
+            </div>
+
+            <div class="preview-container">
+                <h3>Preview</h3>
+                <div id="signaturePreview"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signatureForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            
+            const signatureHTML = `
+                <table class="signature-container" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+                                    <td class="logo-container" align="center" valign="middle">
+                                        <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/bohemiangeeks-logo.webp" alt="Bohemian Geeks Logo" class="logo-img" />
+                                    </td>
+                                    <td class="data" width="66%" valign="top">
+                                        <span class="subtitle">Bohemian Geeks</span>
+                                        <p class="name">${fullName}</p>
+                                        <p class="role">${jobTitle}</p>
+                                        <p class="address">First Settlement, New Cairo, Cairo Governorate, Egypt 11865</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+                                    <td class="socials">
+                                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                            <tr>
+                                                <td width="150">
+                                                    <h2 class="Connect-heading">Let's Connect</h2>
+                                                </td>
+                                                <td>
+                                                    <div class="social-icons">
+                                                        <a href="https://www.linkedin.com/company/bohemian-geeks/" target="_blank" title="LinkedIn">
+                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/linkedin.webp" alt="LinkedIn">
+                                                        </a>
+                                                        <a href="https://www.behance.net/bohemianstudio" target="_blank" title="Behance">
+                                                            <img style="width: 21px; height: 14px;" src="https://bohemiangeeks.com/wp-content/uploads/2025/05/behance.webp" alt="Behance">
+                                                        </a>
+                                                        <a href="https://www.instagram.com/bohemian_geeks/" target="_blank" title="Instagram">
+                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/instagram.webp" alt="Instagram">
+                                                        </a>
+                                                        <a href="https://bohemiangeeks.com/" target="_blank" title="Website">
+                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/website.webp" alt="Website">
+                                                        </a>
+                                                        <a href="tel:+201140004550" target="_blank" title="Call">
+                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/phone.webp" alt="Phone">
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr>
+                                    <td class="footer">
+                                        © BohemianGeeks — Connecting Creative Minds
+                                        <div class="disclaimer">
+                                            Disclaimer: The information provided on this site is for general informational purposes only and does not constitute professional advice.
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            `;
+            
+            document.getElementById('signaturePreview').innerHTML = signatureHTML;
+        });
+    </script>
+</body>
+</html>
