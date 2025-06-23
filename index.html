@@ -744,6 +744,9 @@
           <p>Copy and paste this signature into your email settings</p>
         </div>
         <div id="signaturePreview"></div>
+        <button id="downloadSignature" class="generate-btn" style="margin-top: 20px; display: none;">
+          Download Signature
+        </button>
       </div>
     </div>
     <!-- Hero Section -->
@@ -883,18 +886,150 @@
       </div>
     </div>
 
-    <script>
-      document
-        .getElementById("signatureForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
 
-          const fullName = document.getElementById("fullName").value;
-          const jobTitle = document.getElementById("jobTitle").value;
-          const phone = document.getElementById("phone").value;
-          const fullPhone = `+2${phone}`;
+  <!-- JavaScript Section -->
+  <script>
+    document.getElementById("signatureForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-          const signatureHTML = `
+      const fullName = document.getElementById("fullName").value;
+      const jobTitle = document.getElementById("jobTitle").value;
+      const phone = document.getElementById("phone").value;
+      const fullPhone = `+2${phone}`;
+
+      const signatureHTML = `
+        <style>
+          :root {
+            --text-color: #888;
+            --primary-color: #eb1c5f;
+            --bg-color: #ffffff;
+            --hero-bg: url("https://bohemiangeeks.com/wp-content/uploads/2024/08/2306253931.jpg");
+            --border-color: #e1e4e8;
+          }
+            /* Signature Styles */
+          .signature-container {
+            max-width: 420px;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #333 !important;
+          }
+
+          .signature-container p {
+            color: inherit !important;
+          }
+
+          .signature-container .name,
+          .signature-container .subtitle,
+          .signature-container .Connect-heading {
+            color: #eb1c5f !important;
+          }
+
+          .signature-container .role,
+          .signature-container .footer {
+            color: #888 !important;
+          }
+
+          .signature-container .address {
+            color: #b2b2b2 !important;
+          }
+
+          .logo-container {
+            padding-right: 20px;
+          }
+
+          .logo-img {
+            width: 100%;
+            max-width: 150px;
+          }
+
+          .data {
+            padding-left: 20px;
+            border-left: 4px solid var(--primary-color);
+          }
+
+          .subtitle {
+            font-size: 12px;
+            color: #eb1c5f !important;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 5px;
+          }
+
+          .name {
+            color: #eb1c5f !important;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+          }
+
+          .role {
+            font-size: 14px;
+            color: #888 !important;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+          }
+
+          .address {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1;
+            color: #b2b2b2 !important;
+          }
+
+          .socials {
+            padding: 20px 0 14px 0;
+            height: 30px;
+          }
+
+          .social-icons {
+            margin-left: 20px;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+          }
+          .social-icons a {
+            text-decoration: none;
+            margin-top: 2px;
+          }
+
+          .social-icons img {
+            width: 16px;
+            height: 16px;
+            margin-right: 10px;
+            filter: grayscale(0.8);
+            transition: all 0.3s ease;
+          }
+
+          .social-icons img:hover {
+            filter: grayscale(0);
+          }
+
+          .Connect-heading {
+            color: #eb1c5f !important;
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin: 0;
+          }
+
+          .footer {
+            margin-top: 18px;
+            font-size: 12px;
+            color: #888 !important;
+          }
+
+          .disclaimer {
+            width: 85%;
+            padding: 13px 0;
+            border-top: 1px solid #e1e4e8;
+            margin-top: 5px;
+          }
+      </style>
                 <table class="signature-container" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td>
@@ -908,7 +1043,6 @@
                                         <p class="name" style="color:#EB1C5F;">${fullName}</p>
                                         <p class="role">${jobTitle}</p>
                                         <p class="address">First Settlement, New Cairo, Cairo Governorate, Egypt 11865</p>
-                                     
                                     </td>
                                 </tr>
                             </table>
@@ -949,7 +1083,7 @@
                             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                                 <tr>
                                     <td class="footer">
-                                        © BohemianGeeks — Created To Creat
+                                        © BohemianGeeks — Created To Create
                                         <div class="disclaimer">
                                             Disclaimer: The information provided on this site is for general informational purposes only and does not constitute professional advice.
                                         </div>
@@ -961,28 +1095,49 @@
                 </table>
             `;
 
-          document.getElementById("signaturePreview").innerHTML = signatureHTML;
-          showPopup();
-        });
+      document.getElementById("signaturePreview").innerHTML = signatureHTML;
+      showPopup();
+    });
 
-      // Loader fade-out on page load
-      window.addEventListener("load", function () {
-        setTimeout(function () {
-          document.getElementById("page-loader").classList.add("hide");
-        }, 400); // slight delay for smoothness
-      });
+    // Show Popup and Display Download Button
+    function showPopup() {
+      const popup = document.getElementById("signaturePopup");
+      popup.classList.add("active");
+      document.body.style.overflow = "hidden";
+      document.getElementById("downloadSignature").style.display = "block";
+    }
 
-      function showPopup() {
-        const popup = document.getElementById("signaturePopup");
-        popup.classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
+    // Close Popup
+    function closePopup() {
+      const popup = document.getElementById("signaturePopup");
+      popup.classList.remove("active");
+      document.body.style.overflow = "";
+    }
 
-      function closePopup() {
-        const popup = document.getElementById("signaturePopup");
-        popup.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-    </script>
+    // Loader fade-out on page load
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        document.getElementById("page-loader").classList.add("hide");
+      }, 400);
+    });
+
+    // Download Signature as HTML File
+    document.getElementById("downloadSignature").addEventListener("click", function () {
+      const signatureHTML = document.getElementById("signaturePreview").innerHTML;
+      const blob = new Blob([signatureHTML], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+
+      // Customize file name with user's name
+      const fullName = document.getElementById("fullName").value.replace(/\s+/g, '_');
+      link.download = `${fullName}_signature.html`;
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    });
+  </script>
   </body>
 </html>
