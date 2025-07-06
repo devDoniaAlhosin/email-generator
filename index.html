@@ -744,7 +744,11 @@
           <p>Copy and paste this signature into your email settings</p>
         </div>
         <div id="signaturePreview"></div>
-        <button id="downloadSignature" class="generate-btn" style="margin-top: 20px; display: none;">
+        <button
+          id="downloadSignature"
+          class="generate-btn"
+          style="margin-top: 20px; display: none"
+        >
           Download Signature
         </button>
       </div>
@@ -886,258 +890,130 @@
       </div>
     </div>
 
+    <!-- JavaScript Section -->
+    <script>
+      document
+        .getElementById("signatureForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
 
-  <!-- JavaScript Section -->
-  <script>
-    document.getElementById("signatureForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+          const fullName = document.getElementById("fullName").value;
+          const jobTitle = document.getElementById("jobTitle").value;
+          const phone = document.getElementById("phone").value;
+          const fullPhone = `+2${phone}`;
 
-      const fullName = document.getElementById("fullName").value;
-      const jobTitle = document.getElementById("jobTitle").value;
-      const phone = document.getElementById("phone").value;
-      const fullPhone = `+2${phone}`;
+          const signatureHTML = `
+        <table class="signature-container" cellpadding="0" cellspacing="0" border="0" style="max-width:420px;overflow:hidden;font-family:Arial,sans-serif;color:#333 !important;">
+            <tr>
+                <td>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td class="logo-container" align="center" valign="middle" style="padding-right:20px;">
+                                <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/bohemiangeeks-logo.png" alt="Bohemian Geeks Logo" class="logo-img" style="width:100%;max-width:150px;" />
+                            </td>
+                            <td class="data" width="66%" valign="top" style="padding-left:20px;border-left:4px solid #eb1c5f;">
+                                <span class="subtitle" style="font-size:12px;color:#eb1c5f !important;font-weight:400;text-transform:uppercase;letter-spacing:4px;display:block;margin-bottom:5px;">Bohemian Geeks</span>
+                                <p class="name" style="color:#eb1c5f !important;font-size:16px;font-weight:bold;margin:0;padding:0;line-height:1.2;">${fullName}</p>
+                                <p class="role" style="font-size:14px;color:#888 !important;margin:0;padding:0;line-height:1.2;">${jobTitle}</p>
+                                <p class="address" style="margin-top:10px;font-size:13px;line-height:1;color:#b2b2b2 !important;">First Settlement, New Cairo, Cairo Governorate, Egypt 11865</p>
+                            </td>
+                        </tr>
+                    </table>
 
-      const signatureHTML = `
-        <style>
-          :root {
-            --text-color: #888;
-            --primary-color: #eb1c5f;
-            --bg-color: #ffffff;
-            --hero-bg: url("https://bohemiangeeks.com/wp-content/uploads/2024/08/2306253931.jpg");
-            --border-color: #e1e4e8;
-          }
-            /* Signature Styles */
-          .signature-container {
-            max-width: 420px;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            color: #333 !important;
-          }
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td class="socials" style="padding:20px 0 14px 0;height:30px;">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr>
+                                        <td width="150">
+                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/lets-connect.png" alt="Let's Connect" style="max-width:120px;height:auto;">             
+                                        </td>
+                                        <td>
+                                            <div class="social-icons" style="margin-left:20px;display:flex;justify-content:flex-start;align-items:center;">
+                                                <a href="https://www.linkedin.com/company/bohemian-geeks/" target="_blank" title="LinkedIn" style="text-decoration:none;margin-top:2px;">
+                                                    <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/linkedin.png" alt="LinkedIn" style="width:16px;height:16px;margin-right:10px;filter:grayscale(0.8);transition:all 0.3s ease;">
+                                                </a>
+                                                <a href="https://www.behance.net/bohemianstudio" target="_blank" title="Behance" style="text-decoration:none;margin-top:2px;">
+                                                    <img style="width:21px;height:14px;margin-right:10px;filter:grayscale(0.8);transition:all 0.3s ease;" src="https://bohemiangeeks.com/wp-content/uploads/2025/05/behance.png" alt="Behance">
+                                                </a>
+                                                <a href="https://www.instagram.com/bohemian_geeks/" target="_blank" title="Instagram" style="text-decoration:none;margin-top:2px;">
+                                                    <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/instagram.png" alt="Instagram" style="width:16px;height:16px;margin-right:10px;filter:grayscale(0.8);transition:all 0.3s ease;">
+                                                </a>
+                                                <a href="https://bohemiangeeks.com/" target="_blank" title="Website" style="text-decoration:none;margin-top:2px;">
+                                                    <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/website.png" alt="Website" style="width:16px;height:16px;margin-right:10px;filter:grayscale(0.8);transition:all 0.3s ease;">
+                                                </a>
+                                                <a href="tel:${fullPhone}" target="_blank" title="Call" style="text-decoration:none;margin-top:2px;">
+                                                    <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/phone.png" alt="Phone" style="width:16px;height:16px;margin-right:10px;filter:grayscale(0.8);transition:all 0.3s ease;">
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
 
-          .signature-container p {
-            color: inherit !important;
-          }
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td class="footer" style="margin-top:18px;font-size:12px;color:#888 !important;">
+                                © BohemianGeeks — Created To Creat
+                                <div class="disclaimer" style="width:85%;padding:13px 0;border-top:1px solid #e1e4e8;margin-top:5px;">
+                                    Disclaimer: The information provided on this site is for general informational purposes only and does not constitute professional advice.
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+      `;
 
-          .signature-container .name,
-          .signature-container .subtitle,
-          .signature-container .Connect-heading {
-            color: #eb1c5f !important;
-          }
+          document.getElementById("signaturePreview").innerHTML = signatureHTML;
+          showPopup();
+        });
 
-          .signature-container .role,
-          .signature-container .footer {
-            color: #888 !important;
-          }
+      // Show Popup and Display Download Button
+      function showPopup() {
+        const popup = document.getElementById("signaturePopup");
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+        document.getElementById("downloadSignature").style.display = "block";
+      }
 
-          .signature-container .address {
-            color: #b2b2b2 !important;
-          }
+      // Close Popup
+      function closePopup() {
+        const popup = document.getElementById("signaturePopup");
+        popup.classList.remove("active");
+        document.body.style.overflow = "";
+      }
 
-          .logo-container {
-            padding-right: 20px;
-          }
+      // Loader fade-out on page load
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          document.getElementById("page-loader").classList.add("hide");
+        }, 400);
+      });
 
-          .logo-img {
-            width: 100%;
-            max-width: 150px;
-          }
-
-          .data {
-            padding-left: 20px;
-            border-left: 4px solid var(--primary-color);
-          }
-
-          .subtitle {
-            font-size: 12px;
-            color: #eb1c5f !important;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            display: block;
-            margin-bottom: 5px;
-          }
-
-          .name {
-            color: #eb1c5f !important;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
-            line-height: 1.2;
-          }
-
-          .role {
-            font-size: 14px;
-            color: #888 !important;
-            margin: 0;
-            padding: 0;
-            line-height: 1.2;
-          }
-
-          .address {
-            margin-top: 10px;
-            font-size: 13px;
-            line-height: 1;
-            color: #b2b2b2 !important;
-          }
-
-          .socials {
-            padding: 20px 0 14px 0;
-            height: 30px;
-          }
-
-          .social-icons {
-            margin-left: 20px;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-          }
-          .social-icons a {
-            text-decoration: none;
-            margin-top: 2px;
-          }
-
-          .social-icons img {
-            width: 16px;
-            height: 16px;
-            margin-right: 10px;
-            filter: grayscale(0.8);
-            transition: all 0.3s ease;
-          }
-
-          .social-icons img:hover {
-            filter: grayscale(0);
-          }
-
-          .Connect-heading {
-            color: #eb1c5f !important;
-            font-weight: 600;
-            font-size: 18px;
-            letter-spacing: 1px;
-            margin: 0;
-          }
-
-          .footer {
-            margin-top: 18px;
-            font-size: 12px;
-            color: #888 !important;
-          }
-
-          .disclaimer {
-            width: 85%;
-            padding: 13px 0;
-            border-top: 1px solid #e1e4e8;
-            margin-top: 5px;
-          }
-      </style>
-                <table class="signature-container" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                        <td>
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <tr>
-                                    <td class="logo-container" align="center" valign="middle">
-                                        <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/bohemiangeeks-logo.png" alt="Bohemian Geeks Logo" class="logo-img" />
-                                    </td>
-                                    <td class="data" width="66%" valign="top">
-                                        <span class="subtitle" style="color:#EB1C5F;">Bohemian Geeks</span>
-                                        <p class="name" style="color:#EB1C5F;">${fullName}</p>
-                                        <p class="role">${jobTitle}</p>
-                                        <p class="address">First Settlement, New Cairo, Cairo Governorate, Egypt 11865</p>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <tr>
-                                    <td class="socials">
-                                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                            <tr>
-                                                <td width="150">
-                                                    <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/lets-connect.png" alt="Let's Connect" style="max-width: 80%; height: auto;">             
-                                                </td>
-                                                <td>
-                                                    <div class="social-icons">
-                                                        <a href="https://www.linkedin.com/company/bohemian-geeks/" target="_blank" title="LinkedIn">
-                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/linkedin.png" alt="LinkedIn">
-                                                        </a>
-                                                        <a href="https://www.behance.net/bohemianstudio" target="_blank" title="Behance">
-                                                            <img style="width: 21px; height: 14px;" src="https://bohemiangeeks.com/wp-content/uploads/2025/05/behance.png" alt="Behance">
-                                                        </a>
-                                                        <a href="https://www.instagram.com/bohemian_geeks/" target="_blank" title="Instagram">
-                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/instagram.png" alt="Instagram">
-                                                        </a>
-                                                        <a href="https://bohemiangeeks.com/" target="_blank" title="Website">
-                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/website.png" alt="Website">
-                                                        </a>
-                                                        <a href="tel:${fullPhone}" target="_blank" title="Call">
-                                                            <img src="https://bohemiangeeks.com/wp-content/uploads/2025/05/phone.png" alt="Phone">
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                                <tr>
-                                    <td class="footer">
-                                        © BohemianGeeks — Created To Create
-                                        <div class="disclaimer">
-                                            Disclaimer: The information provided on this site is for general informational purposes only and does not constitute professional advice.
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            `;
-
-      document.getElementById("signaturePreview").innerHTML = signatureHTML;
-      showPopup();
-    });
-
-    // Show Popup and Display Download Button
-    function showPopup() {
-      const popup = document.getElementById("signaturePopup");
-      popup.classList.add("active");
-      document.body.style.overflow = "hidden";
-      document.getElementById("downloadSignature").style.display = "block";
-    }
-
-    // Close Popup
-    function closePopup() {
-      const popup = document.getElementById("signaturePopup");
-      popup.classList.remove("active");
-      document.body.style.overflow = "";
-    }
-
-    // Loader fade-out on page load
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        document.getElementById("page-loader").classList.add("hide");
-      }, 400);
-    });
-
-    // Download Signature as HTML File
-    document.getElementById("downloadSignature").addEventListener("click", function () {
-      const signatureHTML = document.getElementById("signaturePreview").innerHTML;
-      const blob = new Blob([signatureHTML], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-
-      // Customize file name with user's name
-      const fullName = document.getElementById("fullName").value.replace(/\s+/g, '_');
-      link.download = `${fullName}_signature.html`;
-
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    });
-  </script>
+      // Download Signature as HTML File
+      document
+        .getElementById("downloadSignature")
+        .addEventListener("click", function () {
+          const signatureHTML =
+            document.getElementById("signaturePreview").innerHTML;
+          const blob = new Blob([signatureHTML], { type: "text/html" });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          // Customize file name with user's name
+          const fullName = document
+            .getElementById("fullName")
+            .value.replace(/\s+/g, "_");
+          link.download = `${fullName}_signature.html`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        });
+    </script>
   </body>
 </html>
